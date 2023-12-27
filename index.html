@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 카드 뒤집기 게임</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #card-container {
+            display: flex;
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            margin: 10px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card-container">
+        <!-- 카드를 여기에 추가합니다. -->
+    </div>
+
+    <script>
+        // 카드 이미지 URL 배열
+        var cardImages = [
+            'https://placekitten.com/100/150', // 임시로 고양이 이미지 사용
+            'https://placekitten.com/100/150',
+            'https://placekitten.com/100/150',
+            'https://placekitten.com/100/150'
+        ];
+
+        // 카드를 뒤집었는지 여부를 저장하는 배열
+        var flippedCards = [];
+
+        // 카드 클릭 시 호출되는 함수
+        function flipCard(index) {
+            // 이미 뒤집힌 카드는 무시
+            if (flippedCards.includes(index)) {
+                return;
+            }
+
+            // 이미 두 장의 카드가 뒤집혀 있으면 비교
+            if (flippedCards.length === 2) {
+                setTimeout(compareCards, 500);
+            }
+
+            // 카드를 뒤집은 상태로 표시
+            flippedCards.push(index);
+            updateCard(index);
+        }
+
+        // 카드 비교 함수
+        function compareCards() {
+            var card1 = flippedCards[0];
+            var card2 = flippedCards[1];
+
+            // 여기에서 카드를 비교하고 처리하는 로직을 추가할 수 있습니다.
+
+            // 비교가 끝나면 뒤집힌 상태 초기화
+            flippedCards = [];
+            updateCard(card1);
+            updateCard(card2);
+        }
+
+        // 카드 상태 업데이트 함수
+        function updateCard(index) {
+            var cardElement = document.getElementById('card-' + index);
+            if (flippedCards.includes(index)) {
+                // 뒤집힌 카드면 앞면 보여주기
+                cardElement.style.transform = 'rotateY(180deg)';
+            } else {
+                // 뒤집히지 않은 카드면 뒷면 보여주기
+                cardElement.style.transform = 'rotateY(0deg)';
+            }
+        }
+
+        // 초기 카드 생성
+        function initializeCards() {
+            var cardContainer = document.getElementById('card-container');
+
+            for (var i = 0; i < cardImages.length; i++) {
+                var cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.id = 'card-' + i;
+
+                // 카드를 클릭하면 flipCard 함수 호출
+                cardElement.setAttribute('onclick', 'flipCard(' + i + ')');
+
+                var imgElement = document.createElement('img');
+                imgElement.src = cardImages[i];
+                cardElement.appendChild(imgElement);
+
+                cardContainer.appendChild(cardElement);
+            }
+        }
+
+        // 페이지 로드 시 초기화 함수 호출
+        window.onload = function () {
+            initializeCards();
+        };
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 카드 뒤집기 게임</title>
+    <style>
+        /* 이전 코드와 동일 */
+    </style>
+</head>
+<body>
+
+    <div id="card-container">
+        <!-- 카드를 여기에 추가합니다. -->
+    </div>
+
+    <script>
+        // 이전 코드와 동일
+
+        // 초기화 함수에 룰 프롬프트 추가
+        function initializeCards() {
+            var cardContainer = document.getElementById('card-container');
+
+            for (var i = 0; i < cardImages.length; i++) {
+                var cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.id = 'card-' + i;
+
+                // 카드를 클릭하면 flipCard 함수 호출
+                cardElement.setAttribute('onclick', 'flipCard(' + i + ')');
+
+                var imgElement = document.createElement('img');
+                imgElement.src = cardImages[i];
+                cardElement.appendChild(imgElement);
+
+                cardContainer.appendChild(cardElement);
+            }
+
+            // 게임 룰 프롬프트 추가
+            setTimeout(showGameRules, 1000);
+        }
+
+        // 게임 룰 프롬프트 표시 함수
+        function showGameRules() {
+            var rules = "게임 룰:\n1. 카드를 클릭하여 뒤집어보세요.\n2. 두 장의 카드를 맞추면 성공입니다!\n3. 모든 카드를 맞추면 게임 클리어!\n\n즐거운 게임 플레이를 기대합니다!";
+            alert(rules);
+        }
+
+        // 이전 코드와 동일
+
+        // 페이지 로드 시 초기화 함수 호출
+        window.onload = function () {
+            initializeCards();
+        };
+    </script>
+
+</body>
+</html>
